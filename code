@@ -1,0 +1,54 @@
+-- Task 8: INNER, LEFT, RIGHT & FULL JOINS (SQLite)
+
+CREATE TABLE departments (
+    dept_id INTEGER PRIMARY KEY,
+    dept_name TEXT
+);
+
+CREATE TABLE employees (
+    emp_id INTEGER PRIMARY KEY,
+    emp_name TEXT,
+    dept_id INTEGER
+);
+
+INSERT INTO departments (dept_id, dept_name) VALUES
+(1, 'HR'),
+(2, 'Engineering'),
+(3, 'Marketing'),
+(4, 'Finance');
+
+INSERT INTO employees (emp_id, emp_name, dept_id) VALUES
+(101, 'Rahul', 2),
+(102, 'Sneha', 1),
+(103, 'Amit', 2),
+(104, 'Priya', NULL),
+(105, 'Arjun', 5);
+
+-- INNER JOIN
+SELECT e.emp_id, e.emp_name, d.dept_name
+FROM employees e
+INNER JOIN departments d
+ON e.dept_id = d.dept_id;
+
+-- LEFT JOIN
+SELECT e.emp_id, e.emp_name, d.dept_name
+FROM employees e
+LEFT JOIN departments d
+ON e.dept_id = d.dept_id;
+
+-- RIGHT JOIN (simulated)
+SELECT e.emp_id, e.emp_name, d.dept_name
+FROM departments d
+LEFT JOIN employees e
+ON e.dept_id = d.dept_id;
+
+-- FULL JOIN (simulated using UNION)
+SELECT e.emp_id, e.emp_name, d.dept_name
+FROM employees e
+LEFT JOIN departments d
+ON e.dept_id = d.dept_id
+UNION
+SELECT e.emp_id, e.emp_name, d.dept_name
+FROM departments d
+LEFT JOIN employees e
+ON e.dept_id = d.dept_id;
